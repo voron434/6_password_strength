@@ -8,6 +8,18 @@ This script will show you your password strength in range from 0 to 10 points.
 * 4 points if it is not in our blacklist
 * 1-3 points for it's length
 
+# Quickstart
+
+Example of script launch on Linux, Python 3.6:
+
+```#!bash
+
+$ python password_strength.py
+Enter password to check:
+<password>
+Your password level: 5
+```
+
 
 # Project Goals
 
