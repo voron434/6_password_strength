@@ -1,5 +1,5 @@
 def get_password_strength(password):
-    strength = 0
+    strength = 1
     symbols = '#$@'
     digits = '0123456789'
     password_blacklist = ['password1', '12345', 'qwerty', 'bestpassword', 'password']
@@ -22,9 +22,7 @@ def get_password_strength(password):
     else:
         strength += 4
 
-    if len(password) > 18:
-        strength += 3
-    elif len(password) > 12:
+    if len(password) > 12:
         strength += 2
     elif len(password) > 6:
         strength += 1
