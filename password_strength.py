@@ -35,5 +35,5 @@ def get_password_strength(password):
 
 if __name__ == '__main__':
     password = input('Enter password to check:')
-    print('Уровень вашего пароля: %s' % get_password_strength(password))
+    print('Your password level: %s' % get_password_strength(password))
 
