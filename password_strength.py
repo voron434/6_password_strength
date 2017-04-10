@@ -2,6 +2,11 @@ from getpass import getpass
 import os
 
 
+def check_case(password):
+    if not (password.islower() or password.isupper()):
+        return True
+
+    
 def check_symbol(password):
     symbols = '!@#$%^&*()_+-=:;"?/>.<,|'
     for symbol in symbols:
@@ -44,7 +49,8 @@ def check_length12(password):
 
 def get_password_strength(password):
     strength = 1
-    password_checkers = [{'checker': check_symbol, 'points': 2},
+    password_checkers = [{'checker': check_symbol, 'points': 1},
+                         {'checker': check_case, 'points': 1},
                          {'checker': check_digit, 'points': 1},
                          {'checker': check_blacklist, 'points': 4},
                          {'checker': check_length6, 'points': 1},
