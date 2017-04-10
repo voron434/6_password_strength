@@ -1,48 +1,64 @@
+from getpass import getpass
+import os
+
+
 def check_symbol(password):
-    symbols = '#$@'
+    symbols = '!@#$%^&*()_+-=:;"?/>.<,|'
     for symbol in symbols:
         if symbol in password:
-            return 1
-    return 0
+            return True
 
 
 def check_digit(password):
     digits = '0123456789'
     for digit in digits:
         if digit in password:
-            return 1
-    return 0
+            return True
+
+
+def load_blacklist(path='Blacklist.txt'):
+    with open(path, mode='r', encoding='utf-8') as blacklist_file:
+        blacklist = []
+        for blacklist_password in blacklist_file:
+            blacklist.append(blacklist_password[:-1]) #for deleting line break
+    return blacklist
 
 
 def check_blacklist(password):
-    password_blacklist = ['password1', '12345', 'qwerty', 'bestpassword', 'password']
-    for password_from_blacklist in password_blacklist:
+    blacklist = load_blacklist()
+    for password_from_blacklist in blacklist:
         if password.lower() == password_from_blacklist.lower():
-            return 0
-    return 4
+            return False
+    return True
 
 
-def check_length(password):
+def check_length6(password):
+    if len(password) > 6:
+        return True
+
+
+def check_length12(password):
     if len(password) > 12:
-        return 2
-    elif len(password) > 6:
-        return 1
-    else:
-        return 0
+        return True
+
 
 def get_password_strength(password):
     strength = 1
-    password_checkers = [check_blacklist,
-                         check_digit,
-                         check_length,
-                         check_symbol
-                        ]
+    password_checkers = [{'checker': check_symbol, 'points': 2},
+                         {'checker': check_digit, 'points': 1},
+                         {'checker': check_blacklist, 'points': 4},
+                         {'checker': check_length6, 'points': 1},
+                         {'checker': check_length12, 'points': 1}
+                         ]
     for checker in password_checkers:
-        strength += checker(password)
+        if checker['checker'](password):
+            strength += checker['points']
     return strength
 
 
-
 if __name__ == '__main__':
-    password = input('Enter password to check:')
+    if not os.path.exists('Blacklist.txt'):
+        print('Blacklist not found, sorry... I would not add points for this type of check.'
+              'There must be file "Blacklist.txt" in the same directory as this script')
+    password = getpass('Enter password to check:')
     print('Your password level: %s' % get_password_strength(password))
