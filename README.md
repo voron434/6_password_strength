@@ -1,7 +1,7 @@
 # Password Strength Calculator
 
 This script will show you your password strength in range from 1 to 10 points.    
-There must be also my Blacklist.txt file in the same directory for script.
+There must be also my Blacklist.txt file in the same directory for script. 621853 passwords in it!
 
 * 1 point for any digit in your password
 * 1 point for any symbol in your password
