@@ -3,8 +3,7 @@ import os
 
 
 def check_case(password):
-    if not (password.islower() or password.isupper()):
-        return True
+    return not (password.islower() or password.isupper()):
 
     
 def check_symbol(password):
@@ -25,7 +24,7 @@ def load_blacklist(path='Blacklist.txt'):
     with open(path, mode='r', encoding='utf-8') as blacklist_file:
         blacklist = []
         for blacklist_password in blacklist_file:
-            blacklist.append(blacklist_password[:-1]) #for deleting line break
+            blacklist.append(blacklist_password[:-1])  # for deleting line break
     return blacklist
 
 
@@ -38,13 +37,11 @@ def check_blacklist(password):
 
 
 def check_length6(password):
-    if len(password) > 6:
-        return True
+    return len(password) > 6:
 
 
 def check_length12(password):
-    if len(password) > 12:
-        return True
+    return len(password) > 12:
 
 
 def get_password_strength(password):
